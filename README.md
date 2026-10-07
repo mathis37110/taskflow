@@ -1,2 +1,2 @@
 # taskflow
-un projet à but lucratif
+projet à but educatif
