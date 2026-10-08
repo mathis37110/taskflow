@@ -1,37 +1,56 @@
-reponse = None
+answer = None
 task = []
-
-
-while reponse != "4":
+def input_and_strip(question):
+  return input(question).strip()
+def add_task_fuction():
+  add_task = input_and_strip("quelle tache voulez vous ajoutez :")
+  task.append(add_task)
+  print("votre tache ",add_task,"a bien etait ajouter")
+  return
+def delete_task_function():
+ task_delete = input_and_strip("quelle tache voulez vous supprimer :")
+ try:
+  task.remove(task_delete)
+  print("votre tache a bien etait supprimer")
+ except ValueError:
+  print("cette tache n'existe pas")
+ 
+ return
+def print_task_function():
+ print("voici vos tache :")
+ for task_name in task:
+   print(task_name)
+ 
+ return
+def leave_TaskFlow_function():
+ print("au revoir")
+ return
+def print_choice():
  print("------------------------------------------------")
  print("que voulez-vous faire ?")
  print("1. ajouter une tache")
  print("2. supprimer une tache")
  print("3. voir les taches")
  print("4. quitter")
- reponse = input("choix :")
- print(reponse)
+ answer = input("choix :")
  print("----------------------------------------------------")
- if reponse == "1":
-  tache_ajout = input("quelle tache voulez vous ajoutez :").strip()
-  task.append(tache_ajout)
-  print("votre tache ",tache_ajout,"a bien etait ajouter")
+ return answer
+def main_loop(answer):
+ while answer != "4":
+  answer = print_choice()
+  match answer:
+   case "1":
+    add_task_fuction()
+   case "2":
+    delete_task_function()
+   case "3":
+    print_task_function()
+   case "4":
+    leave_TaskFlow_function()
+   case _:
+    print("answer invalide ")
+ return
 
- elif reponse == "2":
-  tache_supprimer = input("quelle tache voulez vous supprimer :").strip()
-  try:
-    task.remove(tache_supprimer)
-    print("votre tache a bien etait supprimer")
-  except ValueError:
-    print("cette tache n'existe pas")
- elif reponse == "3":
-  print("voici vos tache :")
-  for tache in task:
-    print(tache)
-    
- elif reponse == "4":
-  print("au revoir")
 
- else:
-  print("reponse invalide ")
+main_loop(answer)
  
