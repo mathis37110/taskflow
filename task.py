@@ -15,9 +15,13 @@ def add_task() -> None:
   
 
 def delete_task() -> None:
- task_delete = int(input_and_strip("quelle est l'index de la tâche que vous voulez supprimer :"))
- 
- tasks.pop(task_delete)
+ try:
+  task_delete = int(input_and_strip("quelle est l'index de la tâche que vous voulez supprimer :"))
+  tasks.pop(task_delete)
+ except ValueError:
+  print("ERREUR : vous devez mettre un index")
+ except IndexError:
+  print("ERREUR : cette index n'existe pas")
  
   
  
@@ -64,7 +68,7 @@ def main_loop() -> None:
    case "4":
     leave_taskflow()
    case _:
-    print("answer invalide ")
+    print("ERREUR : reponse invalide ")
  
 
 main_loop()
