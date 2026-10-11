@@ -9,26 +9,29 @@ def input_and_strip(question : str) -> str:
 def add_task() -> None:
   new_task = {}
   new_task['name'] = input_and_strip("quelle tache voulez vous ajoutez :")
+  new_task['description'] = input_and_strip("quelle est la description de votre tache :")
   tasks.append(new_task)
   print("votre tache",new_task['name'],"a bien etait ajouter")
   
 
 def delete_task() -> None:
- task_delete = input_and_strip("quelle tache voulez vous supprimer :")
+ task_delete = int(input_and_strip("quelle est l'index de la tâche que vous voulez supprimer :"))
  
- for task in tasks:
-   task_delete_true = task['name'] == task_delete
-   if task_delete_true:
-    tasks.remove(task)
-   else:
-    print("cette tache n'existe pas")
+ tasks.pop(task_delete)
+ 
   
  
 
 def print_tasks() -> None:
  print("voici vos tache :")
+ i = 0
  for task_name in tasks:
-   print(task_name['name'])
+   print("nom de la tache :",task_name['name'])
+   print("description de la tache :",task_name['description'])
+   print("index de la tache :",i)
+   print()
+   
+   i = i + 1
  
 
 def leave_taskflow() -> None:
