@@ -1,35 +1,39 @@
 
 tasks = []
+
+
 def input_and_strip(question : str) -> str: 
   return input(question).strip()
 
 
 def add_task() -> None:
-  new_task = input_and_strip("quelle tache voulez vous ajoutez :")
+  new_task = {}
+  new_task['name'] = input_and_strip("quelle tache voulez vous ajoutez :")
   tasks.append(new_task)
-  print("votre tache ",new_task,"a bien etait ajouter")
+  print("votre tache",new_task['name'],"a bien etait ajouter")
   
-
 
 def delete_task() -> None:
  task_delete = input_and_strip("quelle tache voulez vous supprimer :")
- try:
-  tasks.remove(task_delete)
-  print("votre tache a bien etait supprimer")
- except ValueError:
-  print("cette tache n'existe pas")
-
+ 
+ for task in tasks:
+   task_delete_true = task['name'] == task_delete
+   if task_delete_true:
+    tasks.remove(task)
+   else:
+    print("cette tache n'existe pas")
+  
+ 
 
 def print_tasks() -> None:
  print("voici vos tache :")
  for task_name in tasks:
-   print(task_name)
+   print(task_name['name'])
  
 
 def leave_taskflow() -> None:
  print("au revoir")
  
-
 
 def print_choice() -> None:
  print("------------------------------------------------")
@@ -38,7 +42,7 @@ def print_choice() -> None:
  print("2. supprimer une tache")
  print("3. voir les taches")
  print("4. quitter")
- answer = input("choix :")
+ answer = input_and_strip("choix :")
  print("----------------------------------------------------")
  return answer
 
@@ -59,7 +63,6 @@ def main_loop() -> None:
    case _:
     print("answer invalide ")
  
-
 
 main_loop()
  
