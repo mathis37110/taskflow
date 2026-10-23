@@ -1,7 +1,7 @@
 
 tasks = []
 
-class task():
+class Task():
  
  
  def __init__(self, name, description):
@@ -12,9 +12,9 @@ class task():
  def add_task() -> None:
   name = input_and_strip("quelle tache voulez vous ajoutez :")
   description = input_and_strip("quelle est la description de votre tache :")
-  new_task = task(name, description)
+  new_task = Task(name, description)
   tasks.append(new_task)
-  print("votre tache",new_task.name,"a bien etait ajouter") 
+  print(f"votre tache {new_task.name} a bien etait ajouter") 
 
 
  def delete_task() -> None:
@@ -31,9 +31,9 @@ class task():
   print("voici vos tache :")
   i = 0
   for task_print in tasks:
-   print("nom de la tache :",task_print.name)
-   print("description de la tache :",task_print.description)
-   print("index de la tache :",i)
+   print(f"nom de la tache : {task_print.name}")
+   print(f"description de la tache : {task_print.description}")
+   print(f"index de la tache : {i}")
    print()
    
    i = i + 1
@@ -66,11 +66,11 @@ def main_loop() -> None:
   answer = print_choice()
   match answer:
    case "1":
-    task.add_task()
+    Task.add_task()
    case "2":
-    task.delete_task()
+    Task.delete_task()
    case "3":
-    task.print_tasks()
+    Task.print_tasks()
    case "4":
     leave_taskflow()
    case _:
