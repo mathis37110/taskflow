@@ -69,11 +69,10 @@ def secondary_loop(category, subcategory, determinant, _class, answer, list):
 
 			case "4":
 				try:
-					_class.edit(
-						int(input_and_strip("quelle est l'index a modifier : ")),
-						input_and_strip(f"quelle est le nouveau nom de votre {category} : "),
-						input_and_strip(f"quelle est la nouvelle {subcategory} votre {category}: ")
-						)
+					index_edit = int(input_and_strip("quelle est l'index a modifier : "))
+					new_name = input_and_strip(f"quelle est le nouveau nom de votre {category} : "),
+					new_subcategory = input_and_strip(f"quelle est la nouvelle {subcategory} votre {category}: ")
+					_class.edit(index_edit,new_name,new_subcategory)	
 				except ValueError:
 					print("ERREUR : vous devez mettre un index")
 				except IndexError:
