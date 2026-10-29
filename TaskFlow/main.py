@@ -9,7 +9,8 @@ def print_choice(category, determinant) -> str:
 	print(f"2. supprimer {determinant} {category}")
 	print(f"3. voir les {category}s")
 	print(f"4. modifier {determinant} {category}")
-	print("5. retour")
+	print(f"5. assigner une tache a un utilisateur")
+	print(f"6. retour")
 	answer = input_and_strip("choix : ")
 	print("----------------------------------------------------")
 	return answer
@@ -29,10 +30,10 @@ def main_loop() -> None:
 		match answer:
 			case "1":
 				answer2 = None
-				secondary_loop("tache","description","une",Task,answer2,tasks)
+				secondary_loop("tache" ,"description", "une", Task, answer2, tasks)
 			case "2":
 				answer2 = None
-				secondary_loop("utilisateur","age","un",User,answer2,user_list)
+				secondary_loop("utilisateur", "age", "un", User, answer2, user_list)
 
 			case "3":
 				print("merci et au revoir !")
@@ -41,19 +42,19 @@ def main_loop() -> None:
 				print("ERREUR : reponse invalide ")
 
  
-def secondary_loop(category,subcategory,determinant,classe,answer2,list):
-	while answer2 != "5":
-		answer2 = print_choice(category, determinant)
-		match answer2:
+def secondary_loop(category, subcategory, determinant, _class, answer, list):
+	while answer != "6":
+		answer = print_choice(category, determinant)
+		match answer:
 							
 			case "1":
 				name = input_and_strip(f"quelle est le nom de votre {category} : ")				
-				classe.add(name, input_and_strip(f"quelle est la {subcategory} de votre {category} : "))
+				_class.add(name, input_and_strip(f"quelle est la {subcategory} de votre {category} : "))
 				print(f"votre {category} {name} a bien etait ajouter")
 							
 			case "2":
 				try:	
-					classe.delete(int(input_and_strip("quelle est l'index que vous voulez supprimer : ")))
+					_class.delete(int(input_and_strip("quelle est l'index que vous voulez supprimer : ")))
 				except ValueError:
 					print("ERREUR : vous devez mettre un index et non du texte")
 				except IndexError:
@@ -61,14 +62,14 @@ def secondary_loop(category,subcategory,determinant,classe,answer2,list):
 							
 			case "3":
 				for i,print_to in enumerate(list):
-					print(f"nom de votre {category} : {print_to.name}")
-					print(f"{subcategory} de votre {category} :  {print_to.description}" if category == "tache" else f"{subcategory} de votre {category} : {print_to.age}"  )
+					for key, value in vars(print_to).items():
+						print(f"{key} : {value}")
 					print(f"index : {i}")
 					print()		
 
 			case "4":
 				try:
-					classe.edit(
+					_class.edit(
 						int(input_and_strip("quelle est l'index a modifier : ")),
 						input_and_strip(f"quelle est le nouveau nom de votre {category} : "),
 						input_and_strip(f"quelle est la nouvelle {subcategory} votre {category}: ")
@@ -79,6 +80,16 @@ def secondary_loop(category,subcategory,determinant,classe,answer2,list):
 					print("ERREUR : cette index n'existe pas")		
 
 			case "5":
+				try:
+					index_user = int(input_and_strip("quelle est l'index de l'utilisateur a ajouter : "))
+					index_task = int(input_and_strip("quelle est l'index de la tache a associer : "))			
+					user_list[index_user].assigned_to(index_task)
+				except ValueError:
+					print("ERREUR : vous devez mettre un index")					
+				except IndexError:
+					print("ERREUR : cette index n'existe pas")	
+
+			case "6":
 				print("retour au menu principal")
 
 			case _:

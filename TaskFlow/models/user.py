@@ -9,29 +9,34 @@ class User:
           self.task_assigned = []
           self.id = id(self)
     
-    
-     def add(name : str , age : int) -> None:
-          user_list.append(User(name, age))
+     @staticmethod
+     def add(name : str, age : int) -> None:
+          new_user = User(name, age)
+          user_list.append(new_user)
+          return new_user
 
 
+     @staticmethod
      def delete(index : int) -> None:
           user_list.pop(index)
 
 
+     @staticmethod
      def edit(index : int, name : str, age : int) -> None:
           user_list[index] = name
           user_list[index ]= age
-         
+          return user_list[index]
     
-     def assigned_to(index_task : int, index_user : int) -> None:
-          tasks[index_task].user = user_list[index_user]
+     def assigned_to(self, index_task : int) -> None:
+          tasks[index_task].user = self.name
+          self.task_assigned.append(tasks[index_task]) 
 
-
-     def all_json() -> json:
-          return json.dumps((user.turn_json for user in user_list ))    
     
      
      def turn_json(self) -> dict:
-          return {'name': self.name, 'age' : self.age}
+          return {'name': self.name, 'age' : self.age, 'task_asigned' : self.task_assigned}
 
 
+     @staticmethod
+     def all_json() -> json:
+          return json.dumps((user.turn_json for user in user_list ))    

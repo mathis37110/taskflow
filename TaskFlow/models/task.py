@@ -12,8 +12,8 @@ class Task():
 
 	def add(name : str, description : str) -> None:
 		new_task = Task(name, description)
-		
 		tasks.append(new_task)
+		return new_task
 		 
 
 
@@ -25,11 +25,11 @@ class Task():
 		
 		tasks[index].name = name
 		tasks[index].description = description
-
+		return name, description
 
 
 	def turn_json(self) -> dict:
-		return {"name": self.name, "description": self.description}
+		return {"name": self.name, "description": self.description, "user": self.user}
 
 
 	def all_json() -> json:
