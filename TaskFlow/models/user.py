@@ -16,16 +16,16 @@ class User:
           return new_user
 
 
-     @staticmethod
-     def delete(index : int) -> None:
-          user_list.pop(index)
+
+     def delete(self) -> None:
+          user_list.remove(self)
 
 
-     @staticmethod
-     def edit(index : int, name : str, age : int) -> None:
-          user_list[index] = name
-          user_list[index ]= age
-          return user_list[index]
+
+     def edit(self, name : str, age : int) -> None:
+          self.name = name
+          self.age = age
+          return self
     
      def assigned_to(self, index_task : int) -> None:
           tasks[index_task].user = self.name
@@ -34,7 +34,7 @@ class User:
     
      
      def turn_json(self) -> dict:
-          return {'name': self.name, 'age' : self.age, 'task_asigned' : self.task_assigned}
+          return vars(self)
 
 
      @staticmethod

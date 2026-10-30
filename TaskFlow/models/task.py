@@ -9,7 +9,7 @@ class Task():
 		self.user = None
 
 		
-
+	@staticmethod
 	def add(name : str, description : str) -> None:
 		new_task = Task(name, description)
 		tasks.append(new_task)
@@ -17,19 +17,18 @@ class Task():
 		 
 
 
-	def delete(task_delete : int) -> None:
-		tasks.pop(task_delete)
+	def delete(self) -> None:
+		tasks.remove(self)
 
 
-	def edit(index : str, name : str, description : str) -> None:
-		
-		tasks[index].name = name
-		tasks[index].description = description
-		return name, description
+	def edit(self, name : str, description : str) -> None:
+		self.name = name
+		self.description = description
+	
 
 
 	def turn_json(self) -> dict:
-		return {"name": self.name, "description": self.description, "user": self.user}
+		return vars(self)
 
 
 	def all_json() -> json:

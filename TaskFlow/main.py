@@ -54,25 +54,24 @@ def secondary_loop(category, subcategory, determinant, _class, answer, list):
 							
 			case "2":
 				try:	
-					_class.delete(int(input_and_strip("quelle est l'index que vous voulez supprimer : ")))
+					list[int(input_and_strip("quelle est l'index que vous voulez supprimer : "))].delete()					
 				except ValueError:
 					print("ERREUR : vous devez mettre un index et non du texte")
 				except IndexError:
 					print("ERREUR : vous devez mettre un index valide")	
 							
 			case "3":
-				for i,print_to in enumerate(list):
-					for key, value in vars(print_to).items():
-						print(f"{key} : {value}")
+				for i in list:
+					print(list[i].turn_json())
 					print(f"index : {i}")
 					print()		
 
 			case "4":
 				try:
 					index_edit = int(input_and_strip("quelle est l'index a modifier : "))
-					new_name = input_and_strip(f"quelle est le nouveau nom de votre {category} : "),
+					new_name = input_and_strip(f"quelle est le nouveau nom de votre {category} : ")
 					new_subcategory = input_and_strip(f"quelle est la nouvelle {subcategory} votre {category}: ")
-					_class.edit(index_edit,new_name,new_subcategory)	
+					list[index_edit].edit(new_name,new_subcategory)	
 				except ValueError:
 					print("ERREUR : vous devez mettre un index")
 				except IndexError:
